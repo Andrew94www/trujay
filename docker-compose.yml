@@ -1,0 +1,34 @@
+version: '3.0'
+services:
+  nginx:
+   image: nginx:latest
+     
+   volumes:
+       - ./:/var/www/
+       - ./nginx/conf.d/:/etc/nginx/conf.d
+   ports:
+    -  8000:80
+  #  links:
+  #    - "php-f"
+   depends_on: 
+          - app
+  #  environment:
+  #       DOCUMENT_ROOT: /var/www/public
+  #       INDEX_FILE: index.php
+  #       PHP_FPM_SOCKET: app:9000
+  #  container_name: nginx_web
+   links: 
+       - app
+   networks:
+      - mynet
+  app:
+     image: php:8.1-fpm
+     ports:
+       - "9000:9000"
+     volumes:
+        - ./:/var/www/ 
+     networks:
+      - mynet
+networks:
+    mynet:
+        driver: bridge
