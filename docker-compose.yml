@@ -12,11 +12,11 @@ services:
   #    - "php-f"
    depends_on: 
           - app
-  #  environment:
-  #       DOCUMENT_ROOT: /var/www/public
-  #       INDEX_FILE: index.php
-  #       PHP_FPM_SOCKET: app:9000
-  #  container_name: nginx_web
+   environment:
+        DOCUMENT_ROOT: /var/www/public
+        INDEX_FILE: index.php
+        PHP_FPM_SOCKET: app:9000
+   container_name: nginx_web
    links: 
        - app
    networks:
